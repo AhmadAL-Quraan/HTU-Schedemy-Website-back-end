@@ -1,51 +1,213 @@
-At the beginning of each academic semester at HTU University, the academic administration faces challenges in organizing the process of course assignment for instructors and teaching assistants (TAs). Managing a large number of courses, instructors, and time slots often leads to scheduling conflicts and difficulties in tracking course assignments efficiently.
+# HTU Schedemy – Course Scheduling System
 
-To address this issue, the university decided to develop an electronic application that helps organize and manage the course registration and scheduling process in a centralized and structured manner. The application is designed around multiple pages, where each page is responsible for a specific task that supports effective management.
+## 📌 Project Overview
 
-The application includes:
+At the beginning of each academic semester at **HTU University**, the academic administration faces challenges in organizing course assignments for instructors and teaching assistants (TAs). Managing a large number of courses, instructors, and time slots often leads to scheduling conflicts and inefficient tracking of assignments.
 
-An Add Schedule page that allows adding courses to the semester schedule by specifying lecture time, course, assigned instructor, and teaching assistant.
+To address this issue, an electronic web-based application named **HTU Schedemy** was developed. The system helps organize and manage the course registration and scheduling process in a centralized, structured, and efficient manner.
 
-A View Schedule page that displays the complete schedule in a clear and organized format.
+The application is divided into multiple pages, where each page supports a specific administrative task to improve academic management.
 
-A Manage Courses page to view and manage available courses.
+---
 
-A Manage Instructors page to manage instructor information and their assigned courses.
+## 🧩 Application Features
 
-The development team has completed building the application. The back-end is implemented using Spring Boot, and the front-end is hosted in a separate GitHub repository.
+### 🔹 Add Schedule
+- Add courses to the semester schedule
+- Specify:
+  - Course
+  - Lecture time
+  - Assigned instructor
+  - Teaching assistant (TA)
 
-Deployment & Infrastructure Requirements
+### 🔹 View Schedule
+- Display the complete semester schedule
+- Presented in a clear and organized format
 
-The university plans to deploy the system as a production-ready platform and has the following requirements:
+### 🔹 Manage Courses
+- View all available courses
+- Add, update, or remove courses
 
-The front-end application must be deployed using AWS Amplify.
+### 🔹 Manage Instructors
+- Manage instructor information
+- Track instructor course assignments
 
-The back-end application must be deployed on AWS using EC2 instances.
+---
 
-The application must be accessible through a custom domain name that can be easily managed and updated.
+## 🏗️ System Architecture Overview
 
-The system must support high availability and automatic scaling to handle increased usage during peak registration periods.
+The system follows a **decoupled architecture**, where the front-end and back-end are developed, deployed, and scaled independently.
 
-The application must provide fast access to users from different geographical locations, as the university plans to open branches in multiple countries.
+- **Front-end**: Handles user interaction and UI
+- **Back-end**: Provides RESTful APIs, business logic, and database access
 
-The system must run continuously for many years, and any service failure or abnormal behavior must be monitored and detected automatically.
+This separation improves scalability, availability, and maintainability.
 
-When critical system events occur (such as instance failure, scaling actions, or deployment changes), the responsible technical team must be notified immediately.
+---
 
-The infrastructure should support safe application updates without service interruption.
+## ⚙️ Technology Stack
 
-Tasks
+### 🔹 Back-end
+- Spring Boot
+- RESTful APIs
+- JPA / Hibernate
+- PostgreSQL (recommended for production)
 
-Task 1 – Architecture Design Propose an AWS-based infrastructure architecture that satisfies the above requirements. Clearly explain the services used and how they contribute to availability, scalability, global access, monitoring, and notification.
+### 🔹 Front-end
+- Hosted in a separate GitHub repository
+- Deployed using AWS Amplify
 
-Task 2 – Implementation Implement the proposed solution by:
+---
 
-Deploying the front-end application using AWS Amplify.
+## ☁️ Deployment & Infrastructure Requirements
 
-Deploying the Spring Boot back-end application on AWS EC2.
+The university requires the system to be deployed as a **production-ready platform** with the following capabilities:
 
-Configuring the required AWS services to support domain management, global access, monitoring, event handling, and notifications.
+- Front-end deployed using **AWS Amplify**
+- Back-end deployed on **AWS EC2**
+- Custom domain name support
+- High availability and automatic scaling
+- Fast access for users from different geographical regions
+- Continuous monitoring and failure detection
+- Automatic notifications for critical system events
+- Safe application updates without service interruption
 
-Ensuring that the application can be updated without service interruption.
+---
 
-The implementation should follow best practices and demonstrate a clear understanding of cloud infrastructure concepts.
+## 🧠 Task 1 – AWS Architecture Design
+
+### 🔹 Proposed AWS Infrastructure
+
+The proposed architecture uses the following AWS services:
+
+### 🌐 Front-end Hosting
+- **AWS Amplify**
+  - Hosts the front-end application
+  - Provides CI/CD integration with GitHub
+  - Automatically builds and deploys the UI
+  - Supports custom domain configuration
+
+### 🖥️ Back-end Hosting
+- **Amazon EC2**
+  - Runs the Spring Boot application
+  - Deployed inside an **Auto Scaling Group** for high availability
+  - Multiple instances ensure fault tolerance
+
+### ⚖️ Load Balancing
+- **Application Load Balancer (ALB)**
+  - Distributes incoming API traffic across EC2 instances
+  - Improves availability and scalability
+  - Enables zero-downtime deployments
+
+### 🌍 Global Access & Performance
+- **Amazon CloudFront**
+  - Acts as a global content delivery network (CDN)
+  - Reduces latency for users in different regions
+  - Improves overall performance
+
+### 🌐 Domain Management
+- **Amazon Route 53**
+  - Manages custom domain names
+  - Routes traffic to Amplify (frontend) and ALB (backend)
+  - Supports health checks and DNS failover
+
+### 📈 Monitoring & Logging
+- **Amazon CloudWatch**
+  - Monitors EC2 instance health and application metrics
+  - Collects logs and system performance data
+  - Triggers alarms on abnormal behavior
+
+### 🚨 Notifications
+- **Amazon SNS (Simple Notification Service)**
+  - Sends notifications when critical events occur
+  - Alerts the technical team about:
+    - Instance failures
+    - Scaling events
+    - Deployment updates
+
+---
+
+## 🛠️ Task 2 – Implementation
+
+### 🔹 Front-end Deployment
+- The front-end application is deployed using **AWS Amplify**
+- Amplify is connected directly to the front-end GitHub repository
+- Every push triggers an automatic build and deployment
+- A custom domain is configured using Route 53
+
+### 🔹 Back-end Deployment
+- The Spring Boot application is deployed on **Amazon EC2**
+- Java is installed on EC2 instances
+- The application runs as a persistent service
+- EC2 instances are placed behind an **Application Load Balancer**
+- Auto Scaling Group ensures:
+  - High availability
+  - Automatic scaling during peak registration periods
+
+### 🔹 Continuous Deployment
+- **GitHub Actions** is used to automate backend deployment:
+  - Build the Spring Boot application
+  - Run tests
+  - Deploy the updated application to EC2
+- Enables safe updates without service interruption
+
+```C
+
+You push code to GitHub
+        |
+        v
+GitHub Actions runs
+        |
+        ├── Build Spring Boot JAR
+        ├── Run tests
+        ├── SSH into EC2
+        ├── Upload new JAR
+        └── Restart app
+
+```
+
+
+
+
+
+---
+
+## 🔄 Zero-Downtime Updates
+
+To ensure uninterrupted service:
+- Multiple EC2 instances are used
+- Load balancer routes traffic only to healthy instances
+- New application versions are deployed gradually
+- Old instances are terminated only after new ones become healthy
+
+---
+
+## 🔔 Monitoring & Event Handling
+
+- CloudWatch continuously monitors system health
+- Alarms are triggered for:
+  - CPU or memory spikes
+  - Instance failures
+  - Scaling activities
+- SNS sends immediate notifications to the technical team
+
+---
+
+## 🎯 Conclusion
+
+The proposed AWS-based infrastructure provides:
+
+- High availability
+- Automatic scaling
+- Global accessibility
+- Continuous monitoring
+- Secure and reliable deployments
+
+This architecture ensures that **HTU Schedemy** can run continuously for many years while supporting future expansion as the university grows internationally.
+
+---
+
+## 📎 Notes
+
+- This repository contains the **back-end** implementation.
+- The front-end is hosted in a separate [GitHub repository](https://github.com/AhmadAL-Quraan/HTU-Schedemy-Website-front-end) and deployed using AWS Amplify.

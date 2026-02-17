@@ -64,11 +64,11 @@ Servers are production-ready and managed automatically using Templates which als
 # Health checks & Monitoring
 
 * ALB health check can check the instances availability by sending request to specific path on our service.
-* 
+  
 ![health_check.png](images/health_check.png)
 
 - CloudWatch metrics were used to generate data metrics for each ec2 instance.
-- 
+
 ![metrics_health_check.png](images/metrics_health_check.png)
 
 
